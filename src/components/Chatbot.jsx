@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { supabase } from '../lib/supabase';
 import { X, Send, MessageSquare } from 'lucide-react';
 
 export default function Chatbot() {
@@ -23,15 +24,21 @@ export default function Chatbot() {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:5000/api/chatbot/message', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          message: userMessage.text,
-        }),
-      });
+      const { data: { session } } = await supabase.auth.getSession();
+
+      const response = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/chatbot`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${session?.access_token || import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+          },
+          body: JSON.stringify({
+            message: userMessage.text,
+          }),
+        }
+      );
 
       const data = await response.json();
 
@@ -46,7 +53,7 @@ export default function Chatbot() {
         const errorResponse = {
           id: Date.now() + 1,
           type: 'bot',
-          text: 'Sorry, I encountered an error. Please try again.',
+          text: data.error || 'Sorry, I encountered an error. Please try again.',
         };
         setMessages(prev => [...prev, errorResponse]);
       }
@@ -55,7 +62,7 @@ export default function Chatbot() {
       const errorResponse = {
         id: Date.now() + 1,
         type: 'bot',
-        text: 'Sorry, I\'m having trouble connecting. Please make sure the server is running.',
+        text: 'Sorry, I\'m having trouble connecting. Please try again.',
       };
       setMessages(prev => [...prev, errorResponse]);
     } finally {
