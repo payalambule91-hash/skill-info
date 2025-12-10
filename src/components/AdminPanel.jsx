@@ -158,7 +158,10 @@ export default function AdminPanel({ onBack }) {
 
                 {/* Quick Actions */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                  <button className="bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-xl transition-colors flex items-center justify-center gap-2">
+                  <button
+                    className="bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-xl transition-colors flex items-center justify-center gap-2"
+                    onClick={() => setActiveTab('users')}
+                  >
                     <Users className="w-5 h-5" />
                     Manage Users
                   </button>

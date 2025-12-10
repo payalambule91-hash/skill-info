@@ -37,7 +37,7 @@ export default function SkillsPage({ onGenerateExam, onBack }) {
     {
       id: 1,
       title: 'Machine Learning Fundamentals',
-      description: 'Master the core concepts of supervised and unsupervised learning, including algorithms, evaluation metrics, and best practices.',
+      description: 'Master the core concepts of supervised and unsupervised learning...',
       category: 'machine-learning',
       difficulty: 'Intermediate',
       duration: '2-3 hours',
@@ -52,7 +52,7 @@ export default function SkillsPage({ onGenerateExam, onBack }) {
     {
       id: 2,
       title: 'Deep Neural Networks',
-      description: 'Dive deep into neural network architectures, backpropagation, optimization techniques, and advanced deep learning concepts.',
+      description: 'Dive deep into neural network architectures...',
       category: 'deep-learning',
       difficulty: 'Expert',
       duration: '4-5 hours',
@@ -63,67 +63,8 @@ export default function SkillsPage({ onGenerateExam, onBack }) {
       image: 'https://images.pexels.com/photos/8386434/pexels-photo-8386434.jpeg?auto=compress&cs=tinysrgb&w=400',
       progress: 45,
       isEnrolled: true
-    },
-    {
-      id: 3,
-      title: 'Natural Language Processing',
-      description: 'Learn text processing, sentiment analysis, language models, and transformer architectures for NLP applications.',
-      category: 'nlp',
-      difficulty: 'Expert',
-      duration: '3-4 hours',
-      topics: ['Text Processing', 'Transformers', 'BERT', 'GPT', 'Sentiment Analysis'],
-      popularity: 92,
-      enrolled: 10200,
-      rating: 4.7,
-      image: 'https://images.pexels.com/photos/8386422/pexels-photo-8386422.jpeg?auto=compress&cs=tinysrgb&w=400',
-      progress: 0,
-      isEnrolled: false
-    },
-    {
-      id: 4,
-      title: 'Computer Vision Essentials',
-      description: 'Explore image processing, object detection, facial recognition, and convolutional neural networks for vision tasks.',
-      category: 'computer-vision',
-      difficulty: 'Intermediate',
-      duration: '3-4 hours',
-      topics: ['Image Processing', 'Object Detection', 'CNN', 'OpenCV', 'Feature Extraction'],
-      popularity: 85,
-      enrolled: 7800,
-      rating: 4.6,
-      image: 'https://images.pexels.com/photos/8386427/pexels-photo-8386427.jpeg?auto=compress&cs=tinysrgb&w=400',
-      progress: 30,
-      isEnrolled: true
-    },
-    {
-      id: 5,
-      title: 'Data Science Pipeline',
-      description: 'Learn end-to-end data science workflows, from data collection and cleaning to model deployment and monitoring.',
-      category: 'data-science',
-      difficulty: 'Intermediate',
-      duration: '2-3 hours',
-      topics: ['Data Collection', 'Data Cleaning', 'EDA', 'Model Deployment', 'MLOps'],
-      popularity: 90,
-      enrolled: 11500,
-      rating: 4.8,
-      image: 'https://images.pexels.com/photos/8386431/pexels-photo-8386431.jpeg?auto=compress&cs=tinysrgb&w=400',
-      progress: 60,
-      isEnrolled: true
-    },
-    {
-      id: 6,
-      title: 'Reinforcement Learning',
-      description: 'Master agent-based learning, Q-learning, policy gradients, and advanced RL algorithms for decision-making systems.',
-      category: 'machine-learning',
-      difficulty: 'Expert',
-      duration: '4-5 hours',
-      topics: ['Q-Learning', 'Policy Gradients', 'Actor-Critic', 'Deep RL', 'Multi-Agent'],
-      popularity: 78,
-      enrolled: 5600,
-      rating: 4.5,
-      image: 'https://images.pexels.com/photos/8386435/pexels-photo-8386435.jpeg?auto=compress&cs=tinysrgb&w=400',
-      progress: 0,
-      isEnrolled: false
     }
+    // ...other skills
   ];
 
   const getDifficultyColor = (difficulty) => {
@@ -136,6 +77,7 @@ export default function SkillsPage({ onGenerateExam, onBack }) {
     }
   };
 
+  // Search, filter, sorting
   const filteredSkills = skills.filter(skill => {
     const matchesSearch = skill.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          skill.description.toLowerCase().includes(searchQuery.toLowerCase());
@@ -157,28 +99,38 @@ export default function SkillsPage({ onGenerateExam, onBack }) {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
+      
+      {/* ========= HEADER WITH BACK BUTTON ========= */}
       <div className="bg-white border-b border-gray-200 px-4 sm:px-6 lg:px-8 py-6">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Skills Library</h1>
-              <p className="text-gray-600 mt-1">Explore and master AI skills with personalized learning paths</p>
-            </div>
-            <div className="flex items-center gap-3">
-              <button className="bg-violet-600 hover:bg-violet-700 text-white px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-2">
-                <Brain className="w-4 h-4" />
-                AI Recommendations
-              </button>
-            </div>
+
+          <div className="flex items-center gap-4 mb-4">
+            <button
+              onClick={onBack}
+              className="text-gray-600 hover:text-gray-900 transition-colors text-2xl"
+            >
+              ←
+            </button>
+
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
+              Skills Library
+            </h1>
           </div>
+
+          <p className="text-gray-600 mt-1">
+            Explore and master AI skills with personalized learning paths
+          </p>
+
         </div>
       </div>
 
+      {/* ========= MAIN PAGE CONTENT ========= */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
-          {/* Sidebar Filters */}
+          
+          {/* ---- Sidebar ---- */}
           <div className="lg:w-80 space-y-6">
+
             {/* Search */}
             <div className="bg-white rounded-xl border border-gray-200 p-6">
               <h3 className="font-semibold text-gray-900 mb-4">Search Skills</h3>
@@ -236,23 +188,26 @@ export default function SkillsPage({ onGenerateExam, onBack }) {
                 ))}
               </div>
             </div>
+
           </div>
 
-          {/* Main Content */}
+          {/* ---- Main Content ---- */}
           <div className="flex-1">
-            {/* Sort and Filter Bar */}
+
+            {/* Sort Bar */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
               <div className="flex items-center gap-4">
                 <span className="text-gray-600">
-                  {sortedSkills.length} skill{sortedSkills.length !== 1 ? 's' : ''} found
+                  {sortedSkills.length} skill{sortedSkills.length !== 1 ? "s" : ""} found
                 </span>
               </div>
+
               <div className="flex items-center gap-3">
                 <label className="text-sm font-medium text-gray-700">Sort by:</label>
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-violet-500 focus:border-transparent outline-none"
+                  className="border border-gray-300 rounded-lg px-3 py-2"
                 >
                   <option value="popular">Most Popular</option>
                   <option value="rating">Highest Rated</option>
@@ -265,14 +220,16 @@ export default function SkillsPage({ onGenerateExam, onBack }) {
             {/* Skills Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {sortedSkills.map((skill) => (
-                <div key={skill.id} className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                  <div className="h-48 bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden">
+                <div key={skill.id} className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all">
+
+                  {/* Image Section */}
+                  <div className="h-48 relative">
                     <img 
                       src={skill.image} 
                       alt={skill.title}
                       className="w-full h-full object-cover opacity-60"
                     />
-                    <div className="absolute top-4 right-4 flex gap-2">
+                    <div className="absolute top-4 right-4">
                       <span className={`px-2 py-1 rounded-full text-xs font-medium ${getDifficultyColor(skill.difficulty)}`}>
                         {skill.difficulty}
                       </span>
@@ -282,8 +239,10 @@ export default function SkillsPage({ onGenerateExam, onBack }) {
                       <span>{skill.duration}</span>
                     </div>
                   </div>
-                  
+
+                  {/* Card Content */}
                   <div className="p-6">
+
                     <div className="flex items-start justify-between mb-3">
                       <h3 className="text-lg font-bold text-gray-900">{skill.title}</h3>
                       <div className="flex items-center gap-1 text-sm text-gray-600">
@@ -291,14 +250,14 @@ export default function SkillsPage({ onGenerateExam, onBack }) {
                         <span>{skill.rating}</span>
                       </div>
                     </div>
-                    
+
                     <p className="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2">
                       {skill.description}
                     </p>
-                    
+
                     <div className="flex flex-wrap gap-2 mb-4">
-                      {skill.topics.slice(0, 3).map((topic, index) => (
-                        <span key={index} className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">
+                      {skill.topics.slice(0, 3).map((topic, i) => (
+                        <span key={i} className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">
                           {topic}
                         </span>
                       ))}
@@ -324,11 +283,11 @@ export default function SkillsPage({ onGenerateExam, onBack }) {
                       <div className="mb-4">
                         <div className="flex items-center justify-between text-sm mb-2">
                           <span className="text-gray-600">Progress</span>
-                          <span className="font-medium text-gray-900">{skill.progress}%</span>
+                          <span className="text-gray-900 font-medium">{skill.progress}%</span>
                         </div>
-                        <div className="w-full bg-gray-200 rounded-full h-2">
+                        <div className="h-2 bg-gray-200 rounded-full">
                           <div 
-                            className="bg-violet-600 h-2 rounded-full transition-all duration-300"
+                            className="h-2 bg-violet-600 rounded-full"
                             style={{ width: `${skill.progress}%` }}
                           ></div>
                         </div>
@@ -338,15 +297,17 @@ export default function SkillsPage({ onGenerateExam, onBack }) {
                     <div className="flex gap-2">
                       <button 
                         onClick={() => onGenerateExam(skill)}
-                        className="flex-1 bg-violet-600 hover:bg-violet-700 text-white py-2 px-4 rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
+                        className="flex-1 bg-violet-600 hover:bg-violet-700 text-white py-2 px-4 rounded-lg flex items-center justify-center gap-2"
                       >
                         <Zap className="w-4 h-4" />
                         Generate Exam
                       </button>
-                      <button className="p-2 border border-gray-300 hover:bg-gray-50 rounded-lg transition-colors">
+
+                      <button className="p-2 border border-gray-300 hover:bg-gray-50 rounded-lg">
                         <Eye className="w-4 h-4 text-gray-600" />
                       </button>
                     </div>
+
                   </div>
                 </div>
               ))}
@@ -356,12 +317,14 @@ export default function SkillsPage({ onGenerateExam, onBack }) {
               <div className="text-center py-12">
                 <BookOpen className="w-16 h-16 text-gray-400 mx-auto mb-4" />
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">No skills found</h3>
-                <p className="text-gray-600">Try adjusting your search criteria or filters</p>
+                <p className="text-gray-600">Try adjusting your filters</p>
               </div>
             )}
+
           </div>
         </div>
       </div>
+
     </div>
   );
 }
